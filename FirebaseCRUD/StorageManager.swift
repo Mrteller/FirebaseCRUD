@@ -53,31 +53,11 @@ final class StorageManager {
         }
     }
     
-    func listItem() {
-        // Create a reference
-        let storageRef = storage.reference().child("images")
-        
-        // Create a completion handler - aka what the function should do after it listed all the items
-        let handler: (Result<StorageListResult, Error>) -> Void = { result in
-            
-            switch result {
-            case .failure(let error):
-                print("error", error)
-            case .success(let result):
-                let item = result.items
-                print("item: ", item)
-            }
-        }
-        // List the items
-        storageRef.list(maxResults: 1, completion: handler)
+    func listItem(for name: String) -> StorageReference {
+        storage.reference().child("images/\(name).jpg")
     }
     
-    // You can use the listItem() function above to get the StorageReference of the item you want to delete
-    func deleteItem(item: StorageReference) {
-        item.delete { error in
-            if let error = error {
-                print("Error deleting item", error)
-            }
-        }
+    func deleteItem(item: StorageReference) async throws {
+        try await item.delete()
     }
 }

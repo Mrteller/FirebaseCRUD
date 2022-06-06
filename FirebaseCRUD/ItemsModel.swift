@@ -3,15 +3,9 @@ import FirebaseFirestoreSwift
 
 struct ItemsModel: Identifiable, Codable {
     
-    @DocumentID var id: String?
+    @DocumentID var id = UUID().uuidString
     var title: String
     var price: Int
     var image: String
     
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case title
-//        case price = "price"
-//        case image
-//    }
 }

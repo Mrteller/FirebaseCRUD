@@ -22,14 +22,14 @@ class ItemViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    private func addItem(_ item: ItemsModel) {
-        do {
-            let _ = try db.collection("products").addDocument(from: item)
-        }
-        catch {
-            print(error)
-        }
-    }
+//    private func addItem(_ item: ItemsModel) {
+//        do {
+//            let _ = try db.collection("products").addDocument(from: item)
+//        }
+//        catch {
+//            print(error)
+//        }
+//    }
     
     private func updateItem(_ item: ItemsModel) {
         if let documentID = item.id {
@@ -42,29 +42,29 @@ class ItemViewModel: ObservableObject {
         }
     }
     private func updateOrAddItem() {
-        if let _ = item.id {
-            self.updateItem(self.item)
-        }
-        else {
-        addItem(item)
-        }
+//        if let _ = item.id {
+            updateItem(item)
+//        }
+//        else {
+//        addItem(item)
+//        }
     }
     
     
     func handleDoneTapped() {
-        self.updateOrAddItem()
+        updateOrAddItem()
     }
     
     private func removeItem() {
         if let documentID = item.id {
-            db.collection("products").document(documentID).delete { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
+            Task {
+                try await db.collection("products").document(documentID).delete()
+                let storageReference = StorageManager().listItem(for: documentID)
+                try await StorageManager().deleteItem(item: storageReference)
             }
         }
     }
     func handleDeleteTapped() {
-        self.removeItem()
+        removeItem()
     }
 }
