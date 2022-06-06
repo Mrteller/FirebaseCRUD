@@ -31,6 +31,10 @@ class ItemViewModel: ObservableObject {
     //        }
     //    }
     
+    @MainActor func updateItemImage(url: String) {
+        item.image = url
+    }
+    
     private func updateItem(_ item: ItemsModel) {
         if let documentID = item.id {
             do {

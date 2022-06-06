@@ -29,7 +29,7 @@ struct ItemEditView: View {
     
     var saveButton: some View {
         Button(mode == .new ? "Done" : "Save", action: handleDoneTapped)
-        .disabled(!viewModel.modified && isLoadingImage)
+        .disabled(!viewModel.modified || isLoadingImage)
     }
     
     var cancelButton: some View {
@@ -92,12 +92,17 @@ struct ItemEditView: View {
         .onChange(of: image) { newValue in
             Task {
                 isLoadingImage = true
-                await StorageManager().upload(image: image, name: viewModel.item.id ?? "untitled") { url in
-                DispatchQueue.main.async {
-                    viewModel.item.image = url.absoluteString
+                // TODO: make `viewModel.item.id` non Optional?
+                // make `upload(image...)` throwing?
+                // move to viewModel
+                guard let url = await StorageManager().upload(image: image, name: viewModel.item.id ?? "untitled")
+                else {
                     isLoadingImage = false
+                    return
                 }
-            }}
+                viewModel.updateItemImage(url: url.absoluteString)
+                isLoadingImage = false
+            }
         }
     }
     func handleDeleteTapped() {

@@ -5,7 +5,7 @@ import FirebaseStorage
 final class StorageManager {
     let storage = Storage.storage()
     
-    func upload(image: UIImage, name: String, savedWithURL: ((URL) -> Void)? = nil) async {
+    func upload(image: UIImage, name: String) async -> URL? {
         // Create a storage reference
         let storageRef = storage.reference().child("images/\(name).jpg")
         
@@ -21,16 +21,15 @@ final class StorageManager {
         
         
         // Upload the image
-        if let data = data {
-            do {
-                let storedMetadata = try await storageRef.putDataAsync(data, metadata: metadata)
-                print("Metadata: ", storedMetadata)
-                let storedURL = try await storageRef.downloadURL()
-                savedWithURL?(storedURL)
-            }
-            catch {
-                print(error.localizedDescription)
-            }
+        guard let data = data else { return nil }
+        do {
+            let storedMetadata = try await storageRef.putDataAsync(data, metadata: metadata)
+            print("Metadata: ", storedMetadata)
+            return try await storageRef.downloadURL()
+        }
+        catch {
+            print(error.localizedDescription)
+            return nil
         }
         
     }
