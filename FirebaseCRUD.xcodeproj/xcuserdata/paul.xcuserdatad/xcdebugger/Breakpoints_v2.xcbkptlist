@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "534D1265-5366-4D64-B751-AD82335C1DA0"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7A92356-6C66-4C07-91F5-5B221C3C3827"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FirebaseCRUD/StorageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "upload(image:name:savedWithURL:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E7A92356-6C66-4C07-91F5-5B221C3C3827 - 8c3bd8725c7d8f74"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "1935">
+               </Location>
+               <Location
+                  uuid = "E7A92356-6C66-4C07-91F5-5B221C3C3827 - dc7ba33d10da801d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "377">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C289B95-6E96-46A3-B364-2AC786D88BBA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FirebaseCRUD/StorageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "upload(image:name:savedWithURL:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7C289B95-6E96-46A3-B364-2AC786D88BBA - 8c3bd8725c7d8f32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1531">
+               </Location>
+               <Location
+                  uuid = "7C289B95-6E96-46A3-B364-2AC786D88BBA - 8c3bd8725c7d8f32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1666">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "733620E6-E292-45D0-8DF9-7E910A2F5750"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FirebaseCRUD/StorageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "upload(image:name:savedWithURL:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "733620E6-E292-45D0-8DF9-7E910A2F5750 - dc7ba33d10da81df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "713">
+               </Location>
+               <Location
+                  uuid = "733620E6-E292-45D0-8DF9-7E910A2F5750 - c00e6d9c372de7d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for FirebaseCRUD.StorageManager.upload(image: __C.UIImage, name: Swift.String, savedWithURL: Swift.Optional&lt;(Foundation.URL) -&gt; ()&gt;) async -&gt; ()"
+                  moduleName = "FirebaseCRUD"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/paul/Documents/Code/Firebase/FirebaseCRUD/FirebaseCRUD/StorageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "247">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
