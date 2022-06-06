@@ -25,11 +25,11 @@ struct ItemEditView: View {
     
     @State private var image = UIImage()
     @State private var isShowingImagePicker = false
-    
+    @State private var isLoadingImage = false
     
     var saveButton: some View {
         Button(mode == .new ? "Done" : "Save", action: handleDoneTapped)
-        .disabled(!viewModel.modified)
+        .disabled(!viewModel.modified && isLoadingImage)
     }
     
     var cancelButton: some View {
@@ -77,6 +77,7 @@ struct ItemEditView: View {
                 }
             }
         }
+        .interactiveDismissDisabled(isLoadingImage)
         // TODO: replace with confirmation dialog
         .actionSheet(isPresented: $presentActionSheet) {
             ActionSheet(title: Text("Are you sure?"),
@@ -89,9 +90,12 @@ struct ItemEditView: View {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $image)
         }
         .onChange(of: image) { newValue in
-            Task { await StorageManager().upload(image: image, name: viewModel.item.id ?? "untitled") { url in
+            Task {
+                isLoadingImage = true
+                await StorageManager().upload(image: image, name: viewModel.item.id ?? "untitled") { url in
                 DispatchQueue.main.async {
                     viewModel.item.image = url.absoluteString
+                    isLoadingImage = false
                 }
             }}
         }
