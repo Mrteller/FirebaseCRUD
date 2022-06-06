@@ -18,18 +18,18 @@ class ItemViewModel: ObservableObject {
                 self?.modified = true
             }
             .store(in: &cancellables)
-        }
+    }
     
     private var db = Firestore.firestore()
     
-//    private func addItem(_ item: ItemsModel) {
-//        do {
-//            let _ = try db.collection("products").addDocument(from: item)
-//        }
-//        catch {
-//            print(error)
-//        }
-//    }
+    //    private func addItem(_ item: ItemsModel) {
+    //        do {
+    //            let _ = try db.collection("products").addDocument(from: item)
+    //        }
+    //        catch {
+    //            print(error)
+    //        }
+    //    }
     
     private func updateItem(_ item: ItemsModel) {
         if let documentID = item.id {
@@ -42,12 +42,18 @@ class ItemViewModel: ObservableObject {
         }
     }
     private func updateOrAddItem() {
-//        if let _ = item.id {
-            updateItem(item)
-//        }
-//        else {
-//        addItem(item)
-//        }
+        //        if let _ = item.id {
+        updateItem(item)
+        //        }
+        //        else {
+        //        addItem(item)
+        //        }
+    }
+    
+    
+    private func removeMediaForItem(with documentID: String) async throws {
+        let storageReference = StorageManager().listItem(for: documentID)
+        try await StorageManager().deleteItem(item: storageReference)
     }
     
     
@@ -56,15 +62,21 @@ class ItemViewModel: ObservableObject {
     }
     
     private func removeItem() {
-        if let documentID = item.id {
-            Task {
-                try await db.collection("products").document(documentID).delete()
-                let storageReference = StorageManager().listItem(for: documentID)
-                try await StorageManager().deleteItem(item: storageReference)
-            }
+        guard let documentID = item.id else { return }
+        Task {
+            try await db.collection("products").document(documentID).delete()
+            try await removeMediaForItem(with: documentID)
         }
     }
+    
     func handleDeleteTapped() {
         removeItem()
+    }
+    
+    func handleCancelTapped() {
+        guard let documentID = item.id else { return }
+        Task {
+            try await removeMediaForItem(with: documentID)
+        }
     }
 }

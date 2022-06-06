@@ -60,8 +60,7 @@ struct ItemEditView: View {
                 //MARK: - delete
                 if mode == .edit {
                     Section("Delete items") {
-                        Button("Delete") { presentActionSheet.toggle() }
-                            .foregroundColor(.red)
+                        Button("Delete", role: .destructive) { presentActionSheet.toggle() }
                     }
                 }
             }
@@ -109,6 +108,9 @@ struct ItemEditView: View {
     }
     
     func handleCancelTapped() {
+        if mode == .new {
+            viewModel.handleCancelTapped()
+        }
         dismiss()
     }
     
