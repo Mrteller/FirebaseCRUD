@@ -18,16 +18,20 @@ struct ItemsDetailView: View {
             Section(header: Text("Title")) {
                 Text(item.title)
             }
-                Section(header: Text("Price")) {
-
+            Section(header: Text("Price")) {
+                
                 Text("\(item.price)$")
-                }
+            }
             Section(header: Text("Image")) {
-                AnimatedImage(url: URL(string: item.image))
-                    .resizable()
-                    .frame(width: 255, height: 255)
+                HStack {
+                    Spacer()
+                    AnimatedImage(url: URL(string: item.image))
+                        .resizable()
+                        .frame(width: 255, height: 255)
+                    Spacer()
                 }
             }
+        }
             
         
         .navigationTitle(item.title)

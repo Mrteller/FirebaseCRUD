@@ -41,6 +41,7 @@ final class ItemViewModel: ObservableObject {
     
     // TODO: make `viewModel.item.id` non Optional?
     // make `upload(image...)` throwing?
+    // use image data?
     func update(image: UIImage) async {
         await setLoadingImage(true)
         guard let url = await StorageManager().upload(image: image, name: item.id ?? "untitled")
