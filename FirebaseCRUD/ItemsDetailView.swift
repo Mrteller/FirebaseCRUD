@@ -23,17 +23,18 @@ struct ItemsDetailView: View {
                 Text(item.price, format: .currency(code: Locale.current.currencySymbol!))
             }
             Section(header: Text("Image")) {
-                    AnimatedImage(url: URL(string: item.image))
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxHeight: 400)
-                        .cornerRadius(20)
-                        .alignmentGuide(HorizontalAlignment.center) { dimension in
-                            dimension.width / 2
-                        }
+                AnimatedImage(url: URL(string: item.image))
+                //                        .resizable()
+                //                        .aspectRatio(contentMode: .fill)
+                    .fitToAspect()
+                    .frame(maxHeight: 200)
+                    .cornerRadius(20)
+                    .alignmentGuide(HorizontalAlignment.center) { dimension in
+                        dimension.width / 2
+                    }
             }
         }
-            
+        
         
         .navigationTitle(item.title)
         .toolbar {
@@ -45,7 +46,7 @@ struct ItemsDetailView: View {
         }
         .onAppear() {
             print(#file + " " + #function + " for \(item.title)")
-
+            
         }
         .onDisappear() {
             print("ItemDetailView.onDisappear()")
@@ -57,5 +58,30 @@ struct ItemsDetailView: View {
                 }
             }
         }
+    }
+}
+
+
+struct FitToAspectRatio: ViewModifier {
+    
+    let aspectRatio: Double
+    let contentMode: SwiftUI.ContentMode
+    
+    func body(content: Content) -> some View {
+        Color.clear
+            .aspectRatio(aspectRatio, contentMode: .fit)
+            .overlay(
+                content.aspectRatio(nil, contentMode: contentMode)
+            )
+            .clipped()
+    }
+    
+}
+
+extension AnimatedImage {
+    func fitToAspect(_ aspectRatio: Double = 1, contentMode: SwiftUI.ContentMode = .fill) -> some View {
+        self.resizable()
+            .scaledToFill()
+            .modifier(FitToAspectRatio(aspectRatio: aspectRatio, contentMode: contentMode))
     }
 }
