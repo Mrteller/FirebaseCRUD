@@ -1,10 +1,12 @@
 import Foundation
 import Combine
 import FirebaseFirestore
+import UIKit // for UIImage
 
-class ItemViewModel: ObservableObject {    
+@MainActor final class ItemViewModel: ObservableObject {
     @Published var item: ItemsModel
     @Published var modified = false
+    @Published var isLoadingImage = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -21,18 +23,22 @@ class ItemViewModel: ObservableObject {
     }
     
     private var db = Firestore.firestore()
-    
-    //    private func addItem(_ item: ItemsModel) {
-    //        do {
-    //            let _ = try db.collection("products").addDocument(from: item)
-    //        }
-    //        catch {
-    //            print(error)
-    //        }
-    //    }
-    
-    @MainActor func updateItemImage(url: String) {
+        
+    func updateItemImage(url: String) {
         item.image = url
+    }
+    
+    // TODO: make `viewModel.item.id` non Optional?
+    // make `upload(image...)` throwing?
+    func update(image: UIImage) async {
+        isLoadingImage = true
+        guard let url = await StorageManager().upload(image: image, name: item.id ?? "untitled")
+        else {
+            isLoadingImage = false
+            return
+        }
+        updateItemImage(url: url.absoluteString)
+        isLoadingImage = false
     }
     
     private func updateItem(_ item: ItemsModel) {
