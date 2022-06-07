@@ -10,6 +10,8 @@ final class ItemViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    private var db = Firestore.firestore()
+    
     init(item: ItemsModel = ItemsModel(title: "", price: 0, image: "")) {
         self.item = item
         
@@ -22,7 +24,20 @@ final class ItemViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private var db = Firestore.firestore()
+    func handleDoneTapped() {
+        updateOrAddItem()
+    }
+    
+    func handleDeleteTapped() {
+        removeItem()
+    }
+    
+    func handleCancelTapped() {
+        guard let documentID = item.id else { return }
+        Task {
+            try await removeMediaForItem(with: documentID)
+        }
+    }
     
     // TODO: make `viewModel.item.id` non Optional?
     // make `upload(image...)` throwing?
@@ -45,7 +60,7 @@ final class ItemViewModel: ObservableObject {
         isLoadingImage = value
     }
     
-    private func updateItem(_ item: ItemsModel) {
+    private func updateOrAddItem() {
         if let documentID = item.id {
             do {
                 try db.collection("products").document(documentID).setData(from: item)
@@ -55,24 +70,10 @@ final class ItemViewModel: ObservableObject {
             }
         }
     }
-    private func updateOrAddItem() {
-        //        if let _ = item.id {
-        updateItem(item)
-        //        }
-        //        else {
-        //        addItem(item)
-        //        }
-    }
-    
     
     private func removeMediaForItem(with documentID: String) async throws {
         let storageReference = StorageManager().listItem(for: documentID)
         try await StorageManager().deleteItem(item: storageReference)
-    }
-    
-    
-    func handleDoneTapped() {
-        updateOrAddItem()
     }
     
     private func removeItem() {
@@ -83,14 +84,4 @@ final class ItemViewModel: ObservableObject {
         }
     }
     
-    func handleDeleteTapped() {
-        removeItem()
-    }
-    
-    func handleCancelTapped() {
-        guard let documentID = item.id else { return }
-        Task {
-            try await removeMediaForItem(with: documentID)
-        }
-    }
 }
