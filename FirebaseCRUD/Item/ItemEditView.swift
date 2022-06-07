@@ -25,6 +25,7 @@ struct ItemEditView: View {
     
     @State private var image = UIImage()
     @State private var isShowingImagePicker = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
     private var saveButton: some View {
         Button(mode == .new ? "Done" : "Save", action: handleDoneTapped)
@@ -33,6 +34,17 @@ struct ItemEditView: View {
     
     private var cancelButton: some View {
         Button("Cancel", role: .cancel, action: handleCancelTapped)
+    }
+    
+    private func mediaButton(_ source: UIImagePickerController.SourceType) -> some View {
+        Button {
+            sourceType = source
+            isShowingImagePicker = true
+        } label: {
+            Image(systemName: source == .camera ? "camera" : "photo.on.rectangle")
+                .symbolVariant(.fill)
+                .frame(maxWidth: .infinity)
+        }
     }
     
     var body: some View {
@@ -51,9 +63,12 @@ struct ItemEditView: View {
                         .frame(width: 55, height: 55)
                         .clipShape(Circle())
                     
-                    Button("Get") {
-                        isShowingImagePicker = true
+                    HStack {
+                        mediaButton(.camera)
+                        mediaButton(.photoLibrary)
                     }
+                    .font(.title)
+                    .buttonStyle(.bordered)
                 }
                 
                 //MARK: - delete
@@ -70,7 +85,6 @@ struct ItemEditView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     saveButton
                 }
-                
                 ToolbarItem(placement: .cancellationAction) {
                     cancelButton
                 }
@@ -86,7 +100,7 @@ struct ItemEditView: View {
                         ])
         }
         .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $image)
+            ImagePicker(sourceType: sourceType, selectedImage: $image).id(sourceType.rawValue)
         }
         .onChange(of: image) { newValue in
             Task {
