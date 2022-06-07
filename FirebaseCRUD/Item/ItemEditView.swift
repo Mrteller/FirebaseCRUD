@@ -17,8 +17,8 @@ struct ItemEditView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var presentActionSheet = false
-    
-    @ObservedObject var viewModel = ItemViewModel()
+    // TODO: choose between @StateObject and @ObservedObject
+    @StateObject var viewModel = ItemViewModel()
     
     var mode: Mode = .new
     var completionHandler: ((Result<Action, Error>) -> Void)?
@@ -26,12 +26,12 @@ struct ItemEditView: View {
     @State private var image = UIImage()
     @State private var isShowingImagePicker = false
     
-    var saveButton: some View {
+    private var saveButton: some View {
         Button(mode == .new ? "Done" : "Save", action: handleDoneTapped)
             .disabled(!viewModel.modified || viewModel.isLoadingImage)
     }
     
-    var cancelButton: some View {
+    private var cancelButton: some View {
         Button("Cancel", role: .cancel, action: handleCancelTapped)
     }
     

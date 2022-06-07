@@ -3,7 +3,7 @@ import Combine
 import FirebaseFirestore
 import UIKit // for UIImage
 
-@MainActor final class ItemViewModel: ObservableObject {
+final class ItemViewModel: ObservableObject {
     @Published var item: ItemsModel
     @Published var modified = false
     @Published var isLoadingImage = false
@@ -23,22 +23,26 @@ import UIKit // for UIImage
     }
     
     private var db = Firestore.firestore()
-        
-    func updateItemImage(url: String) {
-        item.image = url
-    }
     
     // TODO: make `viewModel.item.id` non Optional?
     // make `upload(image...)` throwing?
     func update(image: UIImage) async {
-        isLoadingImage = true
+        await setLoadingImage(true)
         guard let url = await StorageManager().upload(image: image, name: item.id ?? "untitled")
         else {
-            isLoadingImage = false
+            await setLoadingImage(false)
             return
         }
-        updateItemImage(url: url.absoluteString)
-        isLoadingImage = false
+        await updateItemImage(url: url.absoluteString)
+        await setLoadingImage(false)
+    }
+    
+    @MainActor private func updateItemImage(url: String) {
+        item.image = url
+    }
+    
+    @MainActor private func setLoadingImage(_ value: Bool) {
+        isLoadingImage = value
     }
     
     private func updateItem(_ item: ItemsModel) {
