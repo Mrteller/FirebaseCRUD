@@ -20,16 +20,17 @@ struct ItemsDetailView: View {
             }
             Section(header: Text("Price")) {
                 
-                Text("\(item.price)$")
+                Text(item.price, format: .currency(code: Locale.current.currencySymbol!))
             }
             Section(header: Text("Image")) {
-                HStack {
-                    Spacer()
                     AnimatedImage(url: URL(string: item.image))
                         .resizable()
-                        .frame(width: 255, height: 255)
-                    Spacer()
-                }
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxHeight: 400)
+                        .cornerRadius(20)
+                        .alignmentGuide(HorizontalAlignment.center) { dimension in
+                            dimension.width / 2
+                        }
             }
         }
             

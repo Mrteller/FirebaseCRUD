@@ -60,8 +60,11 @@ struct ItemEditView: View {
                     
                     AnimatedImage(url: URL(string: viewModel.item.image))
                         .resizable()
-                        .frame(width: 55, height: 55)
+                        .frame(width: 80, height: 80)
                         .clipShape(Circle())
+                        .alignmentGuide(HorizontalAlignment.center) { dimension in
+                            dimension.width / 2
+                        }
                     
                     HStack {
                         mediaButton(.camera)
