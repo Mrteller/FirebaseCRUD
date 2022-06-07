@@ -30,6 +30,7 @@ struct ItemEditView: View {
     private var saveButton: some View {
         Button(mode == .new ? "Done" : "Save", action: handleDoneTapped)
             .disabled(!viewModel.modified || viewModel.isLoadingImage)
+            .buttonStyle(ProgressButtonStyle(isLoading: viewModel.isLoadingImage))
     }
     
     private var cancelButton: some View {

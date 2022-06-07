@@ -21,6 +21,7 @@
 		DA163D19284A603200F8155D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DA163D18284A603200F8155D /* FirebaseDatabase */; };
 		DA163D1B284A603200F8155D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DA163D1A284A603200F8155D /* FirebaseFirestore */; };
 		DA163D1D284A603200F8155D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DA163D1C284A603200F8155D /* FirebaseFirestoreSwift */; };
+		DA1DC7E7284FD632001B1017 /* ProgressButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1DC7E6284FD632001B1017 /* ProgressButtonStyle.swift */; };
 		DA2B777C284E064700D124EF /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B777B284E064700D124EF /* StorageManager.swift */; };
 		DA2B777F284E06EE00D124EF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B777E284E06EE00D124EF /* UIImage+.swift */; };
 		DA2B7782284E082000D124EF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DA2B7781284E082000D124EF /* FirebaseStorage */; };
@@ -39,6 +40,7 @@
 		7AA96AFD284939D700BB7C94 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7AA96B082849445600BB7C94 /* ItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsModel.swift; sourceTree = "<group>"; };
 		7AA96B0A2849455900BB7C94 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		DA1DC7E6284FD632001B1017 /* ProgressButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressButtonStyle.swift; sourceTree = "<group>"; };
 		DA2B777B284E064700D124EF /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		DA2B777E284E06EE00D124EF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DA2B7784284E1B7100D124EF /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				DA2B7784284E1B7100D124EF /* ImagePicker.swift */,
+				DA1DC7E6284FD632001B1017 /* ProgressButtonStyle.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				7AA96AF2284939BC00BB7C94 /* ItemsView.swift in Sources */,
 				7AA96B0B2849455900BB7C94 /* ItemsViewModel.swift in Sources */,
 				7AA96AF0284939BC00BB7C94 /* FirebaseCRUDApp.swift in Sources */,
+				DA1DC7E7284FD632001B1017 /* ProgressButtonStyle.swift in Sources */,
 				667D5B13284A189600597C70 /* ItemViewModel.swift in Sources */,
 				667D5B0F284A0C4C00597C70 /* ItemsDetailView.swift in Sources */,
 				7AA96B092849445600BB7C94 /* ItemsModel.swift in Sources */,
