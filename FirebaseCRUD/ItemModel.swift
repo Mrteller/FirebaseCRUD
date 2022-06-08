@@ -1,7 +1,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct ItemsModel: Identifiable, Codable {
+struct ItemModel: Identifiable, Codable {
     // TODO: Find out about best practices dealing with `@DocumentID`
     @DocumentID var id = UUID().uuidString
     var title: String

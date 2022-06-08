@@ -1,11 +1,11 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct ItemsDetailView: View {
+struct ItemDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State var presentEditItemSheet = false
     
-    var item: ItemsModel
+    var item: ItemModel
     
     private func editButton(action: @escaping () -> Void) -> some View {
         Button(action: { action() }) {

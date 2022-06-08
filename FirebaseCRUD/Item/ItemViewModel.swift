@@ -4,7 +4,7 @@ import FirebaseFirestore
 import UIKit // for UIImage
 
 final class ItemViewModel: ObservableObject {
-    @Published var item: ItemsModel
+    @Published var item: ItemModel
     @Published var modified = false
     @Published var isLoadingImage = false
     
@@ -12,7 +12,7 @@ final class ItemViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    init(item: ItemsModel = ItemsModel(title: "", price: 0, image: "")) {
+    init(item: ItemModel = ItemModel(title: "", price: 0, image: "")) {
         self.item = item
         
         self.$item

@@ -13,9 +13,9 @@ struct ItemsView: View {
     //@FirestoreQuery(collectionPath: "products") var items: [ItemsModel]
         
     struct ItemRowView: View {
-        let item: ItemsModel
+        let item: ItemModel
         var body: some View {
-            NavigationLink(destination: ItemsDetailView(item: item)) {
+            NavigationLink(destination: ItemDetailView(item: item)) {
                 VStack(alignment: .leading) {
                     HStack {
                         AnimatedImage(url: URL(string: item.image))
