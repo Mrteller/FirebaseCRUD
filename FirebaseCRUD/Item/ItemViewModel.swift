@@ -9,8 +9,8 @@ final class ItemViewModel: ObservableObject {
     @Published var isLoadingImage = false
     
     private var cancellables = Set<AnyCancellable>()
-    
     private var db = Firestore.firestore()
+    private var itemTypeName: String { String(describing: type(of: item)) }
     
     init(item: ItemModel = ItemModel(title: "", price: 0, image: "")) {
         self.item = item
@@ -64,7 +64,7 @@ final class ItemViewModel: ObservableObject {
     private func updateOrAddItem() {
         if let documentID = item.id {
             do {
-                try db.collection("products").document(documentID).setData(from: item)
+                try db.collection(itemTypeName).document(documentID).setData(from: item)
             }
             catch {
                 print("Error")

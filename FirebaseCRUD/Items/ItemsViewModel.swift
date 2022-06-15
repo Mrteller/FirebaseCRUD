@@ -3,16 +3,22 @@ import Combine
 import FirebaseFirestore
 //import FirebaseFirestoreSwift
 
-class ItemsViewModel: ObservableObject {
+protocol ItemsViewModelProtocol: AnyObject {
+    associatedtype ItemModelType: Codable
+    var items: [ItemModelType] {get set}
+    var listenerRegistration: ListenerRegistration? {get set}
+    func subscribe()
+    func unsubscribe()
+}
+
+extension ItemsViewModelProtocol {
     
     //    @FirestoreQuery(collectionPath: "products") var items: [ItemsModel]
-    @Published var items = [ItemModel]()
     
-    private var db = Firestore.firestore()
-    private var listenerRegistration: ListenerRegistration?
-    
-    deinit {
-        unsubscribe()
+    private var itemTypeName: String {
+        let name = String(describing: ItemModelType.self)
+        print(name)
+        return name
     }
     
     func unsubscribe() {
@@ -24,13 +30,13 @@ class ItemsViewModel: ObservableObject {
     
     func subscribe() {
         if listenerRegistration == nil {
-            listenerRegistration = db.collection("products").addSnapshotListener { [weak self] (querySnapshot, error) in
+            listenerRegistration = Firestore.firestore().collection(itemTypeName).addSnapshotListener { [weak self] (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
                     return
                 }
                 self?.items = documents.compactMap { queryDocumentSnapshot in
-                    try? queryDocumentSnapshot.data(as: ItemModel.self)
+                    try? queryDocumentSnapshot.data(as: ItemModelType.self)
                 }
             }
         }
@@ -48,4 +54,10 @@ class ItemsViewModel: ObservableObject {
 //            }
 //        }
 //    }
+    
+}
+
+final class ItemsViewModel: ObservableObject, ItemsViewModelProtocol {
+    @Published var items = [ItemModel]()
+    var listenerRegistration: ListenerRegistration?
 }
