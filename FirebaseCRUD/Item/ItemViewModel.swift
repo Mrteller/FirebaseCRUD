@@ -80,7 +80,7 @@ final class ItemViewModel: ObservableObject {
     private func removeItem() {
         guard let documentID = item.id else { return }
         Task {
-            try await db.collection("products").document(documentID).delete()
+            try await db.collection(itemTypeName).document(documentID).delete()
             try await removeMediaForItem(with: documentID)
         }
     }
