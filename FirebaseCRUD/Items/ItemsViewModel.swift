@@ -3,10 +3,10 @@ import Combine
 import FirebaseFirestore
 //import FirebaseFirestoreSwift
 
-class ItemsViewModel: ObservableObject {
+class ItemsViewModel<Item: ItemWithImage>: ObservableObject {
     
     //    @FirestoreQuery(collectionPath: "products") var items: [ItemsModel]
-    @Published var items = [ItemModel]()
+    @Published var items = [Item]()
     
     private var db = Firestore.firestore()
     private var listenerRegistration: ListenerRegistration?
@@ -30,7 +30,7 @@ class ItemsViewModel: ObservableObject {
                     return
                 }
                 self?.items = documents.compactMap { queryDocumentSnapshot in
-                    try? queryDocumentSnapshot.data(as: ItemModel.self)
+                    try? queryDocumentSnapshot.data(as: Item.self)
                 }
             }
         }

@@ -8,7 +8,7 @@ import SDWebImageSwiftUI
 
 struct ItemsView: View {
     
-    @StateObject private var viewModel = ItemsViewModel()
+    @StateObject private var viewModel = ItemsViewModel<ItemModel>()
     @State private var presentAddItemSheet = false
     //@FirestoreQuery(collectionPath: "products") var items: [ItemsModel]
         
