@@ -23,7 +23,7 @@ struct ItemDetailView: View {
                 Text(item.price, format: .currency(code: Locale.current.currencySymbol!))
             }
             Section(header: Text("Image")) {
-                AnimatedImage(url: URL(string: item.image))
+                AnimatedImage(url: URL(string: item.imageURL))
                 //                        .resizable()
                 //                        .aspectRatio(contentMode: .fill)
                     .fitToAspect()

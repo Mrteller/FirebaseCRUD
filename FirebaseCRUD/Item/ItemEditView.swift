@@ -18,7 +18,7 @@ struct ItemEditView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var presentActionSheet = false
     // TODO: choose between @StateObject and @ObservedObject
-    @StateObject var viewModel = ItemViewModel()
+    @StateObject var viewModel = ItemViewModel<ItemModel>(item: ItemModel(title: "", price: 0, imageURL: ""))
     
     var mode: Mode = .new
     var completionHandler: ((Result<Action, Error>) -> Void)?
@@ -57,9 +57,9 @@ struct ItemEditView: View {
                         .keyboardType(.numberPad)
                 }
                 Section(header: Text("Image")) {
-                    TextField("Image", text: $viewModel.item.image)
+                    TextField("Image", text: $viewModel.item.imageURL)
                     
-                    AnimatedImage(url: URL(string: viewModel.item.image))
+                    AnimatedImage(url: URL(string: viewModel.item.imageURL))
                         .resizable()
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())

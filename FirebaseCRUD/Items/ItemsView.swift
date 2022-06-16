@@ -18,8 +18,10 @@ struct ItemsView: View {
             NavigationLink(destination: ItemDetailView(item: item)) {
                 VStack(alignment: .leading) {
                     HStack {
-                        AnimatedImage(url: URL(string: item.image))
+                        WebImage(url: URL(string: item.imageURL))
+                            .placeholder(Image(systemName: "image").resizable())
                             .resizable()
+                            .aspectRatio(contentMode: .fill)
                             .frame(width: 55, height: 55)
                             .clipShape(Circle())
                         

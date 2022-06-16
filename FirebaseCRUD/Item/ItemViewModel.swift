@@ -3,8 +3,13 @@ import Combine
 import FirebaseFirestore
 import UIKit // for UIImage
 
-final class ItemViewModel: ObservableObject {
-    @Published var item: ItemModel
+protocol ItemWithImage: Identifiable, Codable {
+    var id: String? { get set }
+    var imageURL: String { get set }
+}
+
+final class ItemViewModel<Item: ItemWithImage>: ObservableObject {
+    @Published var item: Item
     @Published var modified = false
     @Published var isLoadingImage = false
     
@@ -12,7 +17,7 @@ final class ItemViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    init(item: ItemModel = ItemModel(title: "", price: 0, image: "")) {
+    init(item: Item) {
         self.item = item
         
         self.$item
@@ -54,7 +59,7 @@ final class ItemViewModel: ObservableObject {
     }
     
     @MainActor private func updateItemImage(url: String) {
-        item.image = url
+        item.imageURL = url
     }
     
     @MainActor private func setLoadingImage(_ value: Bool) {
