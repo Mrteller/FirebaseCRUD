@@ -6,7 +6,25 @@ import UIKit // for UIImage
 protocol ItemWithImage: Identifiable, Codable {
     var id: String? { get set }
     var imageURL: String { get set }
+    static var collection: String? { get set }
 }
+
+extension ItemWithImage {
+    
+    static var collection: String? {
+        get { nil }
+        set { }
+    }
+    
+    static var collectionName: String {
+        if let collection = collection, !collection.isEmpty {
+            return collection
+        } else {
+            return String(describing: type(of: self))
+        }
+    }
+}
+
 
 final class ItemViewModel<Item: ItemWithImage>: ObservableObject {
     @Published var item: Item
@@ -69,7 +87,7 @@ final class ItemViewModel<Item: ItemWithImage>: ObservableObject {
     private func updateOrAddItem() {
         if let documentID = item.id {
             do {
-                try db.collection("products").document(documentID).setData(from: item)
+                try db.collection(Item.collectionName).document(documentID).setData(from: item)
             }
             catch {
                 print("Error")
@@ -85,7 +103,7 @@ final class ItemViewModel<Item: ItemWithImage>: ObservableObject {
     private func removeItem() {
         guard let documentID = item.id else { return }
         Task {
-            try await db.collection("products").document(documentID).delete()
+            try await db.collection(Item.collectionName).document(documentID).delete()
             try await removeMediaForItem(with: documentID)
         }
     }

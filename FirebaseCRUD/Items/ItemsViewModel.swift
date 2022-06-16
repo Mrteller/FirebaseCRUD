@@ -7,9 +7,22 @@ class ItemsViewModel<Item: ItemWithImage>: ObservableObject {
     
     //    @FirestoreQuery(collectionPath: "products") var items: [ItemsModel]
     @Published var items = [Item]()
+//    private var collection: String?
     
     private var db = Firestore.firestore()
     private var listenerRegistration: ListenerRegistration?
+    
+//    var collectionName: String {
+//        if let collection = collection, !collection.isEmpty {
+//            return collection
+//        } else {
+//            return String(describing: Item.self)
+//        }
+//    }
+//
+//    init(collection: String? = nil) {
+//        self.collection = collection
+//    }
     
     deinit {
         unsubscribe()
@@ -24,7 +37,7 @@ class ItemsViewModel<Item: ItemWithImage>: ObservableObject {
     
     func subscribe() {
         if listenerRegistration == nil {
-            listenerRegistration = db.collection("products").addSnapshotListener { [weak self] (querySnapshot, error) in
+            listenerRegistration = db.collection(Item.collectionName).addSnapshotListener { [weak self] (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
                     return
@@ -36,16 +49,16 @@ class ItemsViewModel<Item: ItemWithImage>: ObservableObject {
         }
     }
     
-//    func removeItems(atOffsets indexSet: IndexSet) {
-//        let itemsToDelete = indexSet.lazy.map { items[$0] }
-//        itemsToDelete.forEach { item in
-//            if let documentID = item.id {
-//                db.collection("products").document(documentID).delete { error in
-//                    if let error = error {
-//                        print("Unable to remove item:\(error.localizedDescription)")
-//                    }
-//                }
-//            }
-//        }
-//    }
+    func removeItems(atOffsets indexSet: IndexSet) {
+        let itemsToDelete = indexSet.lazy.compactMap { [weak self] in self?.items[$0] }
+        itemsToDelete.forEach { item in
+            if let documentID = item.id {
+                db.collection(Item.collectionName).document(documentID).delete { error in
+                    if let error = error {
+                        print("Unable to remove item:\(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
 }
